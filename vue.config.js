@@ -4,11 +4,11 @@ module.exports = {
         resolve: {
             alias: {
                 'assets': '@/assets',
-                'common': 'assets/common',
-                'components':'assets/components',
-                'mock':'assets/mock',
-                'network':'assets/network',
-                'views': 'assets/views'
+                'common': '@/common',
+                'components':'@/components',
+                'mock':'@/mock',
+                'network':'@/network',
+                'views': '@/views'
             }
         }
     }
