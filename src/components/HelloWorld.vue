@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {request} from '@/request/request.js'
+import {request} from 'network/request/request.js'
 export default {
   name: 'HelloWorld',
   props: {
