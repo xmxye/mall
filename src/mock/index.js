@@ -4,9 +4,8 @@ import Mock from 'mockjs'
 // const Random = Mock.Random
 // Random.email()
 // Random.image()
-        let data = {
-            "data|5": [ //生成100条数据 数组
-                {
+      
+        let data =  {
                     "shopId|+1": 1,//生成商品id，自增1
                     "shopMsg": "@ctitle(10)", //生成商品信息，长度为10个汉字
                     "shopName": "@cname",//生成商品名 ， 都是中国人的名字
@@ -15,7 +14,13 @@ import Mock from 'mockjs'
                     "shopStar|1-5": "★", //随机生成1-5个星星
                     "salesVolume|30-1000": 30, //随机生成商品价格 在30-1000之间
                     "shopLogo": "@Image('100x40','#c33', '#ffffff','小北鼻')", //生成随机图片，大小/背景色/字体颜色/文字信息
-                    "food|7": [ //每个商品中再随机生成七个food
+                    "banners|7": [ //每个商品中再随机生成七个food
+                        {
+                            "foodName": "@cname", //food的名字
+                            "img": "@Image('375x200','#c33', '#ffffff','小可')",//生成随机图片，大小/背景色/字体颜色/文字信息
+                        }
+                    ],
+                    "recommends|7": [ //每个商品中再随机生成七个food
                         {
                             "foodName": "@cname", //food的名字
                             "foodPic": "@Image('100x40','#c33', '#ffffff','小可爱')",//生成随机图片，大小/背景色/字体颜色/文字信息
@@ -27,12 +32,10 @@ import Mock from 'mockjs'
                                 }
                             ]
                         }
-                    ]
+                    ],
                 }
-            ]
-        }
 
-Mock.mock('/api/home','get',data)
+Mock.mock('/home/mulData',data)
 
 // console.log(data)
 
