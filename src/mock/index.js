@@ -13,7 +13,7 @@ import Mock from 'mockjs'
                     "shopAddress": "@county(true)", //随机生成地址
                     "shopStar|1-5": "★", //随机生成1-5个星星
                     "salesVolume|30-1000": 30, //随机生成商品价格 在30-1000之间
-                    "shopLogo": "@Image('100x40','#c33', '#ffffff','小北鼻')", //生成随机图片，大小/背景色/字体颜色/文字信息
+                    "pop": "@Image('375x300','#c33', '#ffffff','本周流行')", //生成随机图片，大小/背景色/字体颜色/文字信息
                     "banners|7": [ //每个商品中再随机生成七个food
                         {
                             "foodName": "@cname", //food的名字
