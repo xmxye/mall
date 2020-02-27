@@ -20,17 +20,10 @@ import Mock from 'mockjs'
                             "img": "@Image('375x200','#c33', '#ffffff','小可')",//生成随机图片，大小/背景色/字体颜色/文字信息
                         }
                     ],
-                    "recommends|7": [ //每个商品中再随机生成七个food
+                    "recommends|4": [ //每个商品中再随机生成七个food
                         {
-                            "foodName": "@cname", //food的名字
-                            "foodPic": "@Image('100x40','#c33', '#ffffff','小可爱')",//生成随机图片，大小/背景色/字体颜色/文字信息
-                            "foodPrice|1-100": 20,//生成1-100的随机数
-                            "aname|14": [
-                                { 
-                                    "aname": "@cname", 
-                                    "aprice|30-60": 20 
-                                }
-                            ]
+                            "title": "@ctitle", //food的名字
+                            "img": "@Image('150x150','#e66', '#ffffff','推荐')",//生成随机图片，大小/背景色/字体颜色/文字信息
                         }
                     ],
                 }

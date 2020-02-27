@@ -6,17 +6,20 @@
             </div>
         </nav-bar>
        <home-swiper :banners="banners"></home-swiper>
+       <home-recommend-view :recommends="recommends"></home-recommend-view>
     </div>
 </template>
 <script>
 import NavBar from 'components/common/navbar/NavBar'
 import {getHomeMulData} from 'network/home'
-import HomeSwiper from './childSwiper/HomeSwiper'
+import HomeSwiper from './childComps/HomeSwiper'
+import HomeRecommendView from './childComps/HomeRecommendView'
 export default {
     name:'Home',
     components:{
         NavBar,
-        HomeSwiper       
+        HomeSwiper,
+        HomeRecommendView       
     },
     data(){
         return {
@@ -26,9 +29,9 @@ export default {
     },
     created(){
         getHomeMulData().then(res=>{
-            console.log('res的值',res.data.banners);
+            console.log('res的值',res.data.recommends);
             this.banners = res.data.banners;
-            // this.recommends = res.data.recommends
+            this.recommends = res.data.recommends
         })
     },
     mounted() {
