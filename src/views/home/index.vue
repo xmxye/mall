@@ -8,6 +8,7 @@
     <home-swiper :banners="banners"></home-swiper>
     <home-recommend-view :recommends="recommends"></home-recommend-view>
     <home-pop :pop="pop"></home-pop>
+    <TabControl :titles="['流行','新款','精选']"></TabControl>
 
     <ul>
       <li>列表1</li>
@@ -111,21 +112,29 @@
       <li>列表99</li>
       <li>列表100</li>
     </ul>
+
+    
   </div>
 </template>
 <script>
-import NavBar from "components/common/navbar/NavBar";
 import { getHomeMulData } from "network/home";
+
+import NavBar from "components/common/navbar/NavBar";
+import TabControl from "components/content/tabcontrol/TabControl"
+
 import HomeSwiper from "./childComps/HomeSwiper";
 import HomeRecommendView from "./childComps/HomeRecommendView";
 import HomePop from "./childComps/HomePop";
+
+
 export default {
   name: "Home",
   components: {
     NavBar,
+    TabControl,
     HomeSwiper,
     HomeRecommendView,
-    HomePop
+    HomePop,
   },
   data() {
     return {
@@ -136,7 +145,7 @@ export default {
   },
   created() {
     getHomeMulData().then(res => {
-      console.log("res的值", res.data.pop);
+      // console.log("res的值", res.data.pop);
       this.banners = res.data.banners;
       this.recommends = res.data.recommends;
       this.pop = res.data.pop;

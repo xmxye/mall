@@ -16,7 +16,6 @@ import Mock from 'mockjs'
                     "pop": "@Image('375x300','#c33', '#ffffff','本周流行')", //生成随机图片，大小/背景色/字体颜色/文字信息
                     "banners|7": [ //每个商品中再随机生成七个food
                         {
-                            "foodName": "@cname", //food的名字
                             "img": "@Image('375x200','#c33', '#ffffff','小可')",//生成随机图片，大小/背景色/字体颜色/文字信息
                         }
                     ],
