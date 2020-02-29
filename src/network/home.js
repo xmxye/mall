@@ -4,3 +4,12 @@ export function getHomeMulData(){
         url:'/home/mulData'
     })
 }
+
+export function getHomeGoods(options){
+    return request({
+        url:'/home/goods',
+        method:'post',
+        data:options
+        
+    })
+}
