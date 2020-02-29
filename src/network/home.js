@@ -5,11 +5,14 @@ export function getHomeMulData(){
     })
 }
 
-export function getHomeGoods(options){
+export function getHomeGoods(type,page){
     return request({
         url:'/home/goods',
         method:'post',
-        data:options
+        data:{
+            type,
+            page
+        }
         
     })
 }

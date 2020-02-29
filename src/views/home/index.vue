@@ -42,7 +42,6 @@ import { getHomeMulData ,getHomeGoods} from "network/home";
 
 import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabcontrol/TabControl"
-// import Goods from "components/content/"
 
 import HomeSwiper from "./childComps/HomeSwiper";
 import HomeRecommendView from "./childComps/HomeRecommendView";
@@ -63,30 +62,38 @@ export default {
       banners: [],
       recommends: [],
       pop: "",
-      listParams : {
-        pageIndex: 2,
-        pageSize: 10
-      }     
+      goods:{
+        'pop':{page:0,list:[]},
+        'new':{page:0,list:[]},
+        'sell':{page:0,list:[]}
+      } 
     }
   },
   created() {
+    // 1. 获取首页多个数据
     getHomeMulData().then(res => {
       this.banners = res.data.banners;
       this.recommends = res.data.recommends;
       this.pop = res.data.pop;
     });
 
-    // 获取商品信息  
-    getHomeGoods(this.listParams).then(res => {
-      console.log('测试',res.data)
-    });   
+    // this.getHomeGoods('pop')
+    // this.getHomeGoods('new')
+    // this.getHomeGoods('sell')   
     
   },
   mounted() {     
    
   },
   methods: {
-  
+    // 1. 获取首页商品信息  type  page
+   getHomeGoods(type){
+     const page = this.goods[type].page + 1;
+     getHomeGoods(type,page).then((res)=>{       
+       this.goods[type].list.push(...res.data.list)
+       this.goods[type].page += 1;
+     })
+   }     
   }
 };
 </script>    
