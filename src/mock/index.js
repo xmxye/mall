@@ -27,7 +27,7 @@ Mock.mock('/home/mulData',{
 const dataList = [] 
 for (let i = 0; i < 26; i++) {
   const template = {
-    'img': "@dataImage('200*200','#02adea', 'Hello')",
+    'img': "@dataImage('200x200','#02adea', 'Hello')",
     'description':"@cword(20)",
     'price':"@integer(10, 100)",
     'collect':"@integer(100, 2000)"             

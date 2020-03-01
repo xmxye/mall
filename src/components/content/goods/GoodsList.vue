@@ -1,12 +1,12 @@
 <template>
-  <div class="goods">
+  <div class="goods-list">
       <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Goods',
+  name: 'GoodsList',
   data () {
     return {
       
@@ -25,8 +25,10 @@ export default {
 </script>
 
 <style scoped>
-    .goods{
+    .goods-list{
         display: flex;
-        flex-wrap: wrap;    
+        flex-wrap: wrap; 
+        justify-content: space-around;
+        padding: 4px;   
     }
 </style>

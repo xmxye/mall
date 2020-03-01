@@ -5,11 +5,11 @@
         <span>购物街</span>
       </div>
     </nav-bar>
-    <home-swiper :banners="banners"></home-swiper>
+    <home-swiper :banners="banners" class="xmx-swiper"></home-swiper>
     <home-recommend-view :recommends="recommends"></home-recommend-view>
     <home-pop :pop="pop"></home-pop>
     <TabControl :titles="['流行','新款','精选']"></TabControl>
-
+    <goods :goods="goods['pop'].list"></goods>
 
     <ul>
       <li>列表1</li>
@@ -46,6 +46,9 @@ import TabControl from "components/content/tabcontrol/TabControl"
 import HomeSwiper from "./childComps/HomeSwiper";
 import HomeRecommendView from "./childComps/HomeRecommendView";
 import HomePop from "./childComps/HomePop";
+import Goods from "./childComps/HomeGoods"
+
+
 
 
 export default {
@@ -56,6 +59,8 @@ export default {
     HomeSwiper,
     HomeRecommendView,
     HomePop,
+    Goods
+
   },
   data() {
     return {
@@ -77,7 +82,7 @@ export default {
       this.pop = res.data.pop;
     });
 
-    // this.getHomeGoods('pop')
+    this.getHomeGoods('pop')
     // this.getHomeGoods('new')
     // this.getHomeGoods('sell')   
     
@@ -87,13 +92,23 @@ export default {
   },
   methods: {
     // 1. 获取首页商品信息  type  page
-   getHomeGoods(type){
-     const page = this.goods[type].page + 1;
-     getHomeGoods(type,page).then((res)=>{       
-       this.goods[type].list.push(...res.data.list)
-       this.goods[type].page += 1;
-     })
-   }     
+  //  getHomeGoods(type){
+  //    const page = this.goods[type].page + 1;
+  //    getHomeGoods(type,page).then((res)=>{       
+  //      this.goods[type].list.push(...res.data.list)
+  //      this.goods[type].page += 1;
+  //    })
+  //  }   
+  
+      // 1.(测试)  获取商品信息
+    getHomeGoods(type){
+      const page = this.goods[type].page + 1;
+      getHomeGoods(type,page).then((res)=>{       
+        // console.log(res.data.data[type].list,'999');
+        this.goods[type].list.push(...res.data.data[type].list);
+        this.goods[type].page +=1
+      })
+    }   
   }
 };
 </script>    
@@ -101,5 +116,13 @@ export default {
 .home-nav {
   background-color: RGB(255, 150, 170);
   color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+.xmx-swiper{
+  margin-top: 44px
 }
 </style>

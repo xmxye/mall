@@ -1,11 +1,9 @@
 <template>
   <div class="goods-item">
-      <div>
-          <img class="img" src="" alt="">
-          <p class="description"></p>
-          <span class="price"></span>
-          <span class="collect"></span>
-      </div>
+      <img class="img" :src="goodsItem.img" alt="">
+      <p class="description">{{goodsItem.description}}</p>
+      <span class="price">{{goodsItem.price}}</span>
+      <span class="collect">★{{goodsItem.collect}}</span>
   </div>
 </template>
 
@@ -15,6 +13,14 @@ export default {
   data () {
     return {
       
+    }
+  },
+  props:{
+    goodsItem:{
+      type:Object,
+      default(){
+        return {}
+      }
     }
   },
   components: {
@@ -30,5 +36,22 @@ export default {
 </script>
 
 <style scoped>
-
+.goods-item{
+  width:48%;
+  text-align: center;
+  margin-bottom: 10px;
+  
+}
+.goods-item img{
+  width: 100%
+}
+.goods-item p{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 5px;
+}
+.goods-item span{
+  margin-left: 6px;
+}
 </style>
