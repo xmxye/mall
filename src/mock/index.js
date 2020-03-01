@@ -56,11 +56,11 @@ Mock.mock('/home/goods', 'post', (params) => {
       },
       'new':{
         'page':page,
-        'list':newDataList1
+        'list':[]
       },
       'sell':{
         'page':page,
-        'list':newDataList2
+        'list':[]
       }
     }
   })

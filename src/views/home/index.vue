@@ -8,8 +8,8 @@
     <home-swiper :banners="banners" class="xmx-swiper"></home-swiper>
     <home-recommend-view :recommends="recommends"></home-recommend-view>
     <home-pop :pop="pop"></home-pop>
-    <TabControl :titles="['流行','新款','精选']"></TabControl>
-    <goods :goods="goods['pop'].list"></goods>
+    <tab-control :titles="['流行','新款','精选']" @tabClick='tabClick'></tab-control>
+    <goods :goods="showGoods"></goods>
 
     <ul>
       <li>列表1</li>
@@ -71,7 +71,8 @@ export default {
         'pop':{page:0,list:[]},
         'new':{page:0,list:[]},
         'sell':{page:0,list:[]}
-      } 
+      },
+      currentIndex:'pop' 
     }
   },
   created() {
@@ -90,6 +91,11 @@ export default {
   mounted() {     
    
   },
+  computed: {
+    showGoods(){
+      return this.goods[this.currentIndex].list
+    }
+  },
   methods: {
     // 1. 获取首页商品信息  type  page
   //  getHomeGoods(type){
@@ -103,12 +109,27 @@ export default {
       // 1.(测试)  获取商品信息
     getHomeGoods(type){
       const page = this.goods[type].page + 1;
-      getHomeGoods(type,page).then((res)=>{       
+      getHomeGoods(type,page).then((res)=>{   
         // console.log(res.data.data[type].list,'999');
         this.goods[type].list.push(...res.data.data[type].list);
         this.goods[type].page +=1
       })
-    }   
+    },
+    
+    // 2.tabClick点击后，传到父组件的数据
+    tabClick(index){
+        switch(index){
+          case 0: 
+              this.currentIndex = 'pop';
+              break;
+          case 1: 
+             this.currentIndex = 'new';
+             break;
+          case 2: 
+             this.currentIndex = 'sell'
+             break;
+        }
+    }
   }
 };
 </script>    
