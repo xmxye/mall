@@ -18,11 +18,12 @@ export default {
   display: flex;
   justify-content: space-around;
   height: 49px;
-  background-color: rgba(0, 0, 0, .03);
+  background-color: #fff;
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 999;
   box-shadow: 0 -2px 2px rgba(0, 0, 0, .03); 
 }
 

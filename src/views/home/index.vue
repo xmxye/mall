@@ -1,47 +1,28 @@
 <template>
-  <div id="home">
+  <div id="home">   
     <nav-bar class="home-nav">
       <div slot="center">
         <span>购物街</span>
       </div>
-    </nav-bar>
-    <home-swiper :banners="banners" class="xmx-swiper"></home-swiper>
-    <home-recommend-view :recommends="recommends"></home-recommend-view>
-    <home-pop :pop="pop"></home-pop>
-    <tab-control :titles="['流行','新款','精选']" @tabClick='tabClick'></tab-control>
-    <goods :goods="showGoods"></goods>
-
-    <ul>
-      <li>列表1</li>
-      <li>列表2</li>
-      <li>列表3</li>
-      <li>列表4</li>
-      <li>列表5</li>
-      <li>列表6</li>
-      <li>列表7</li>
-      <li>列表8</li>
-      <li>列表9</li>
-      <li>列表10</li>
-      <li>列表11</li>
-      <li>列表12</li>
-      <li>列表13</li>
-      <li>列表14</li>
-      <li>列表15</li>
-      <li>列表16</li>
-      <li>列表17</li>
-      <li>列表18</li>
-      <li>列表19</li>
-      <li>列表20</li>     
-    </ul>
-
-    
+    </nav-bar> 
+    <scroll class="scroll-content">
+      <home-swiper :banners="banners" class="xmx-swiper"></home-swiper>
+      <home-recommend-view :recommends="recommends"></home-recommend-view>
+      <home-pop :pop="pop"></home-pop>
+      <tab-control :titles="['流行','新款','精选']" @tabClick='tabClick'></tab-control>
+      <goods :goods="showGoods"></goods>       
+    </scroll>   
+       
   </div>
 </template>
 <script>
 import { getHomeMulData ,getHomeGoods} from "network/home";
 
 import NavBar from "components/common/navbar/NavBar";
+import Scroll from "components/common/scroll/scroll"
+
 import TabControl from "components/content/tabcontrol/TabControl"
+
 
 import HomeSwiper from "./childComps/HomeSwiper";
 import HomeRecommendView from "./childComps/HomeRecommendView";
@@ -55,6 +36,7 @@ export default {
   name: "Home",
   components: {
     NavBar,
+    Scroll,
     TabControl,
     HomeSwiper,
     HomeRecommendView,
@@ -72,7 +54,8 @@ export default {
         'new':{page:0,list:[]},
         'sell':{page:0,list:[]}
       },
-      currentIndex:'pop' 
+      currentIndex:'pop',
+      scroll:null 
     }
   },
   created() {
@@ -89,7 +72,7 @@ export default {
     
   },
   mounted() {     
-   
+     
   },
   computed: {
     showGoods(){
@@ -134,6 +117,10 @@ export default {
 };
 </script>    
 <style>
+#home{
+  position: relative;
+  height: 100vh;
+}
 .home-nav {
   background-color: RGB(255, 150, 170);
   color: #fff;
@@ -144,6 +131,13 @@ export default {
   z-index: 999;
 }
 .xmx-swiper{
-  margin-top: 44px
+  /* margin-top: 44px */
 }
+
+.scroll-content{
+  position: absolute;
+  top: 44px;
+  bottom: 49px;
+}
+
 </style>
