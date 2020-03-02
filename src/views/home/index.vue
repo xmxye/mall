@@ -5,14 +5,17 @@
         <span>购物街</span>
       </div>
     </nav-bar> 
-    <scroll class="scroll-content" ref="scroll" :probe-type="3" @scroll="scrollContent">
+    <scroll class="scroll-content" 
+            ref="scroll" 
+            :probe-type="3" 
+            @scroll="scrollContent" @pullingUp = "loadMore">
       <home-swiper :banners="banners" class="xmx-swiper"></home-swiper>
       <home-recommend-view :recommends="recommends"></home-recommend-view>
       <home-pop :pop="pop"></home-pop>
       <tab-control :titles="['流行','新款','精选']" @tabClick='tabClick'></tab-control>
       <goods :goods="showGoods"></goods>       
     </scroll>   
-     <back-top @click.native = "backClick()" v-show="showBackTop"></back-top>  
+     <back-top @click.native = "backClick()" v-show="isShowbackTop"></back-top>  
   </div>
 </template>
 <script>
@@ -57,7 +60,7 @@ export default {
       },
       currentIndex:'pop',
       scroll:null,
-      showBackTop:false 
+      isShowbackTop:false 
     }
   },
   created() {
@@ -74,7 +77,10 @@ export default {
     
   },
   mounted() {     
-     
+     this.$bus.$on('load',()=>{
+       // goods中图片加载完毕后，调用scroll中的refresh方法，重新计算scrollHeight
+       this.$refs.scroll.refresh()
+     })
   },
   computed: {
     showGoods(){
@@ -126,7 +132,15 @@ export default {
 
     // 3. 监听滚动的位置
     scrollContent(position){
-      this.showBackTop = (-position.y) > 500
+      this.isShowbackTop = (-position.y) > 500
+    },
+
+    // 4. 监听上拉加载更多
+    loadMore(){
+      // console.log('99');
+      getHomeGoods(this.currentIndex);
+      this.$refs.scroll.finishPullUp()
+
     }
   }
 };

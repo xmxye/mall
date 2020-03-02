@@ -39,18 +39,25 @@ export default {
 
       // 3. 监听scroll的上拉加载更多
       this.scroll.on('pullingUp',()=>{
-          console.log('上拉加载更多');
-          // 发送请求，渲染数据
-          this.scroll.finishPullUp()  // 多次调用上拉加载
+          this.$emit('pullingUp');
       })
   },
   methods: {
-    /**
-     * 定义scroll回到某个位置的方法
-     */
+     // 1. 定义scroll回到某个位置的方法
     scrollTo(x,y,time=500){
-      this.scroll.scrollTo(0,0,time)
+      this.scroll && this.scroll.scrollTo(0,0,time)
+    },
+
+    // 2. 封装refresh方法
+    refresh(){
+      this.scroll && this.scroll.refresh()
+    },
+
+    // 3. 封装多次上拉加载更多的方法
+    finishPullUp(){
+      this.scroll && this.scroll.finishPullUp()
     }
+
   }
 }
 </script>

@@ -6,6 +6,9 @@ import router from './router/index'
 require ('network/request/request.js')
 require ('mock/index.js')
 
+// 注册事件总线
+Vue.prototype.$bus = new Vue()
+
 Vue.config.productionTip = false
 
 new Vue({

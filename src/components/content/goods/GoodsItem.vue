@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item">
-      <img class="img" :src="goodsItem.img" alt="">
+      <img class="img" :src="goodsItem.img" alt="" @load = "load">
       <p class="description">{{goodsItem.description}}</p>
       <span class="price">{{goodsItem.price}}</span>
       <span class="collect">★{{goodsItem.collect}}</span>
@@ -30,7 +30,9 @@ export default {
       
   },
   methods: {
-    
+    load(){
+      this.$bus.$emit('load')
+    }
   }
 }
 </script>
