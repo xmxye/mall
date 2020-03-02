@@ -20,6 +20,7 @@
 </template>
 <script>
 import { getHomeMulData ,getHomeGoods} from "network/home";
+import {debounce} from "common/utils"
 
 import NavBar from "components/common/navbar/NavBar";
 import Scroll from "components/common/scroll/scroll"
@@ -64,22 +65,21 @@ export default {
     }
   },
   created() {
-    // 1. 获取首页多个数据
-    getHomeMulData().then(res => {
-      this.banners = res.data.banners;
-      this.recommends = res.data.recommends;
-      this.pop = res.data.pop;
-    });
+    // 1.请求多个数据
+    this.getHomeMulData()
 
+    // 2. 请求商品数据
     this.getHomeGoods('pop')
     // this.getHomeGoods('new')
     // this.getHomeGoods('sell')   
     
   },
-  mounted() {     
+  mounted() {    
+     const refresh = debounce((this.$refs.scroll.refresh),3600);
      this.$bus.$on('load',()=>{
        // goods中图片加载完毕后，调用scroll中的refresh方法，重新计算scrollHeight
-       this.$refs.scroll.refresh()
+      //  this.$refs.scroll.refresh();
+          refresh()
      })
   },
   computed: {
@@ -88,7 +88,11 @@ export default {
     }
   },
   methods: {
-    // 1. 获取首页商品信息  type  page
+    /**
+     * 网络请求相关的方法
+     */
+
+  // 1. 获取首页商品信息  type  page
   //  getHomeGoods(type){
   //    const page = this.goods[type].page + 1;
   //    getHomeGoods(type,page).then((res)=>{       
@@ -97,20 +101,31 @@ export default {
   //    })
   //  }   
   
-      // 1.(测试)  获取商品信息
+    // 1.(测试)
     getHomeGoods(type){
       const page = this.goods[type].page + 1;
       getHomeGoods(type,page).then((res)=>{   
         // console.log(res.data.data[type].list,'999');
         this.goods[type].list.push(...res.data.data[type].list);
-        this.goods[type].page +=1
+        this.goods[type].page +=1;
+        //完成一次上拉加载更多
+        this.$refs.scroll.finishPullUp()
       })
     },
+
+     // 2. 获取首页多个数据
+     getHomeMulData(){
+       getHomeMulData().then(res => {
+         this.banners = res.data.banners;
+         this.recommends = res.data.recommends;
+         this.pop = res.data.pop;
+       });
+     },
+
     
     /**
-     * 监听点击事件
+     * 事件监听相关的方法
      */
-    // 1. tabClick点击后，传到父组件的数据
     tabClick(index){
         switch(index){
           case 0: 
@@ -125,22 +140,16 @@ export default {
         }
     },
 
-    // 2. backClick被点击
     backClick(){
       this.$refs.scroll.scrollTo(0,0)
     },
 
-    // 3. 监听滚动的位置
     scrollContent(position){
       this.isShowbackTop = (-position.y) > 500
     },
 
-    // 4. 监听上拉加载更多
     loadMore(){
-      // console.log('99');
       getHomeGoods(this.currentIndex);
-      this.$refs.scroll.finishPullUp()
-
     }
   }
 };
