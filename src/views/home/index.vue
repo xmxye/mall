@@ -5,14 +5,23 @@
         <span>购物街</span>
       </div>
     </nav-bar> 
+    <tab-control class="tab-control-top"
+        :titles="['流行','新款','精选']" 
+        @tabClick='tabClick'
+        ref="tabControl1" v-show="isShowTabControlTop">
+    </tab-control>
     <scroll class="scroll-content" 
             ref="scroll" 
             :probe-type="3" 
             @scroll="scrollContent" @pullingUp = "loadMore">
-      <home-swiper :banners="banners" class="xmx-swiper"></home-swiper>
+      <home-swiper :banners="banners" class="xmx-swiper"  @loadImg="tabControl"></home-swiper>
       <home-recommend-view :recommends="recommends"></home-recommend-view>
       <home-pop :pop="pop"></home-pop>
-      <tab-control :titles="['流行','新款','精选']" @tabClick='tabClick'></tab-control>
+      <tab-control 
+          :titles="['流行','新款','精选']" 
+          @tabClick='tabClick'
+          ref="tabControl2">
+      </tab-control>
       <goods :goods="showGoods"></goods>       
     </scroll>   
      <back-top @click.native = "backClick()" v-show="isShowbackTop"></back-top>  
@@ -61,7 +70,10 @@ export default {
       },
       currentIndex:'pop',
       scroll:null,
-      isShowbackTop:false 
+      isShowbackTop:false,
+      isLoad:false,  // 轮播图的图片已经加载好了 
+      tabOffsetTop:null,
+      isShowTabControlTop:false
     }
   },
   created() {
@@ -81,6 +93,8 @@ export default {
       //  this.$refs.scroll.refresh();
           refresh()
      })
+
+    
   },
   computed: {
     showGoods(){
@@ -138,6 +152,8 @@ export default {
              this.currentIndex = 'sell'
              break;
         }
+        this.$refs.tabControl1.currentIndex = index;
+        this.$refs.tabControl2.currentIndex = index; //保证两次tabControl中文字是一样的
     },
 
     backClick(){
@@ -145,16 +161,21 @@ export default {
     },
 
     scrollContent(position){
-      this.isShowbackTop = (-position.y) > 500
+      this.isShowbackTop = (-position.y) > 500;
+      this.isShowTabControlTop = (-position.y) > this.tabOffsetTop;
     },
 
     loadMore(){
       getHomeGoods(this.currentIndex);
+    },
+    tabControl(){
+       // 2. 完成tabControl的吸顶
+     this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
     }
   }
 };
 </script>    
-<style>
+<style scoped>
 #home{
   position: relative;
   height: 100vh;
@@ -178,4 +199,14 @@ export default {
   bottom: 49px;
 }
 
+.tab-control-top{
+  position: relative;
+  top: 44px;
+  z-index: 9;
+  left: 0;
+  right: 0
+}
+.tab-control-top,tab-control{
+  background-color: #fff;
+}
 </style>

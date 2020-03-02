@@ -51,13 +51,11 @@ export default {
     // 2. 封装refresh方法
     refresh(){ 
       this.scroll && this.scroll.refresh()
-      console.log('refresh');
     },
 
     // 3. 封装多次上拉加载更多的方法
     finishPullUp(){ 
       this.scroll && this.scroll.finishPullUp();
-      console.log('finishPullUp');
     }
 
   }
