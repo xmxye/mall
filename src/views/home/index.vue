@@ -5,14 +5,14 @@
         <span>购物街</span>
       </div>
     </nav-bar> 
-    <scroll class="scroll-content">
+    <scroll class="scroll-content" ref="scroll" :probe-type="3" @scroll="scrollContent">
       <home-swiper :banners="banners" class="xmx-swiper"></home-swiper>
       <home-recommend-view :recommends="recommends"></home-recommend-view>
       <home-pop :pop="pop"></home-pop>
       <tab-control :titles="['流行','新款','精选']" @tabClick='tabClick'></tab-control>
       <goods :goods="showGoods"></goods>       
     </scroll>   
-       
+     <back-top @click.native = "backClick()" v-show="showBackTop"></back-top>  
   </div>
 </template>
 <script>
@@ -22,7 +22,7 @@ import NavBar from "components/common/navbar/NavBar";
 import Scroll from "components/common/scroll/scroll"
 
 import TabControl from "components/content/tabcontrol/TabControl"
-
+import BackTop from "components/content/backTop/BackTop"
 
 import HomeSwiper from "./childComps/HomeSwiper";
 import HomeRecommendView from "./childComps/HomeRecommendView";
@@ -38,6 +38,7 @@ export default {
     NavBar,
     Scroll,
     TabControl,
+    BackTop,
     HomeSwiper,
     HomeRecommendView,
     HomePop,
@@ -55,7 +56,8 @@ export default {
         'sell':{page:0,list:[]}
       },
       currentIndex:'pop',
-      scroll:null 
+      scroll:null,
+      showBackTop:false 
     }
   },
   created() {
@@ -99,7 +101,10 @@ export default {
       })
     },
     
-    // 2.tabClick点击后，传到父组件的数据
+    /**
+     * 监听点击事件
+     */
+    // 1. tabClick点击后，传到父组件的数据
     tabClick(index){
         switch(index){
           case 0: 
@@ -112,6 +117,16 @@ export default {
              this.currentIndex = 'sell'
              break;
         }
+    },
+
+    // 2. backClick被点击
+    backClick(){
+      this.$refs.scroll.scrollTo(0,0)
+    },
+
+    // 3. 监听滚动的位置
+    scrollContent(position){
+      this.showBackTop = (-position.y) > 500
     }
   }
 };
