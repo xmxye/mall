@@ -56,6 +56,11 @@ export default {
     // 3. 封装多次上拉加载更多的方法
     finishPullUp(){ 
       this.scroll && this.scroll.finishPullUp();
+    },
+
+    // 4. 获取滚动的距离
+    getScrollY(){
+      return this.scroll ? this.scroll.y : 0
     }
 
   }

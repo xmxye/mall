@@ -24,7 +24,7 @@
       </tab-control>
       <goods :goods="showGoods"></goods>       
     </scroll>   
-     <back-top @click.native = "backClick()" v-show="isShowbackTop"></back-top>  
+    <back-top @click.native = "backClick()" v-show="isShowbackTop"></back-top>  
   </div>
 </template>
 <script>
@@ -73,7 +73,8 @@ export default {
       isShowbackTop:false,
       isLoad:false,  // 轮播图的图片已经加载好了 
       tabOffsetTop:null,
-      isShowTabControlTop:false
+      isShowTabControlTop:false,
+      saveY:0   //切换时，首页滚动的高度
     }
   },
   created() {
@@ -95,6 +96,18 @@ export default {
      })
 
     
+  },
+  destroyed() {
+    console.log('home页面被销毁了')
+  },
+  activated() {
+    this.$refs.scroll.scrollTo(0,this.saveY,0)
+    console.log(this.$refs.scroll.scroll.scrollTo(0,this.saveY,0))
+  },
+  deactivated() {
+    this.saveY = this.$refs.scroll.getScrollY();
+    console.log('不活跃时候，首页高度',this.saveY)
+
   },
   computed: {
     showGoods(){

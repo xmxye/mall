@@ -2,7 +2,9 @@
   <div id="app">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <main-tab-bar></main-tab-bar>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
