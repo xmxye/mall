@@ -14,6 +14,7 @@ const Home = () => import('views/home/index');
 const Category = () => import('views/category/index');
 const Cart = () => import('views/cart/index');
 const Profile = () => import('views/profile/index');
+const Detail = ()=> import('views/detail/detail')
 
 Vue.use(Router)
 
@@ -43,6 +44,11 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/detail',
+      name: 'Detail',
+      component: Detail
     }
   ]
 })

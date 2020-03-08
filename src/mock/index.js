@@ -27,6 +27,7 @@ Mock.mock('/home/mulData',{
 const dataList = [] 
 for (let i = 0; i < 26; i++) {
   const template = {
+    'id': "@int(1,50)",
     'img': "@dataImage('200x200','#02adea', 'Hello')",
     'description':"@cword(20)",
     'price':"@integer(10, 100)",
@@ -65,5 +66,17 @@ Mock.mock('/home/goods', 'post', (params) => {
     }
   })
 })
+
+/**
+ * 详情页接口一
+ */
+
+Mock.mock('/detail',"get",{   
+  "img": "@dataImage('375x300','#c33', '#ffffff','详情页banner图')", //生成随机图片，大小/背景色/字体颜色/文字信息
+  "descripe":'@paragraph(1)',
+  "presentPrice":'@int(100,200)',
+  "oldPrice":'@int(150,300)'       
+})
+
 
 export default Mock

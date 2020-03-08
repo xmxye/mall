@@ -102,11 +102,9 @@ export default {
   },
   activated() {
     this.$refs.scroll.scrollTo(0,this.saveY,0)
-    console.log(this.$refs.scroll.scroll.scrollTo(0,this.saveY,0))
   },
   deactivated() {
     this.saveY = this.$refs.scroll.getScrollY();
-    console.log('不活跃时候，首页高度',this.saveY)
 
   },
   computed: {
