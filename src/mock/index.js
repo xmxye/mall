@@ -77,12 +77,23 @@ Mock.mock('/detail',"get",{
       "img": "@dataImage('375x200')",//生成随机图片，大小/背景色/字体颜色/文字信息
     }
   ],    
-  "descripe":'@cparagraph(1,3)',
+  "describe":'@cparagraph(1,3)',
   "presentPrice":'@int(100,200)',
   "oldPrice":'@int(150,300)',
   "csell":'@natural(50,300)', 
   "collect":'@natural(50,300)', 
-  "list":['退货补运费','全国包邮','72小时发货'],
+  "deliverTime":'@int(10,30)',
+  "list":[{
+        'title':'退货补运费',
+        'icon':'@dataImage(10x10)'   
+      },
+      { 'title':'全国包邮',
+        'icon':'@dataImage(10x10)'
+      },
+        {'title':'7天无理由退换货',
+        'icon':'@dataImage(10x10)'   
+      }
+    ],
   "info":{
     "title":'@cword',
     "totalSell":'@natural(50,300)',
