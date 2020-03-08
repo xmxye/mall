@@ -25,3 +25,13 @@ export function getDetailInfo(id){
          this.info = goodsInfo.list
      }
  }
+
+ export class Store{
+     constructor(storeInfo){
+        this.info = storeInfo.info.remark;
+        this.logo = storeInfo.storeInfo.img;
+        this.name = storeInfo.storeInfo.title
+        this.totalSell = storeInfo.storeInfo.totalSell
+        this.allGoods = storeInfo.storeInfo.allGoods
+     }
+ }

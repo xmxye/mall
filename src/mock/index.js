@@ -94,28 +94,31 @@ Mock.mock('/detail',"get",{
         'icon':'@dataImage(10x10)'   
       }
     ],
-  "info":{
-    "title":'@cword',
-    "totalSell":'@natural(50,300)',
-    "allGoods":'@natural(50,300)',
+  "info":{   
     'remark':[{
       'title':'描述相符',
       'score':'4.9',
-      'grade':'1',
+      'isBetter':true,
       'level':'高'
     },
     {
       'title':'价格合理',
       'score':'5',
-      'grade':'1',
+      'isBetter':true,
       'level':'高'
     },
     {
       'title':'质量满意',
       'score':'4.0',
-      'grade':'2',
+      'isBetter':false,
       'level':'低'
     }]
+  },
+  'storeInfo':{
+    'img':'@dataImage(50x50,H W)',
+    "title":'@cword(3)',
+    "totalSell":'@natural(50,300)',
+    "allGoods":'@natural(50,300)',
   },
   "title":'@ctitle'       
 })

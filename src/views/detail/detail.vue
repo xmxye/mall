@@ -3,15 +3,17 @@
       <detail-nav-bar></detail-nav-bar>
       <detail-swiper :top-image="topImage"></detail-swiper>
       <detail-goods-info :goods="goods"></detail-goods-info>
+      <detail-store-info :store="store"></detail-store-info>
   </div>
 </template>
 
 <script>
-import {getDetailInfo,Goods} from "network/detail";
+import {getDetailInfo,Goods,Store} from "network/detail";
 
 import DetailNavBar from "./childComps/DetailNavBar"
 import DetailSwiper from "./childComps/DetailSwiper"
 import DetailGoodsInfo from './childComps/DetailGoodsInfo'
+import DetailStoreInfo from './childComps/DetailStoreInfo'
 
 
 export default {
@@ -20,13 +22,15 @@ export default {
     return {
       id:null,
       topImage:[],
-      goods:{}
+      goods:{},   // 商品详情
+      store:{}   // 店铺详情
     }
   },
   components: {
      DetailNavBar,
      DetailSwiper,
-     DetailGoodsInfo
+     DetailGoodsInfo,
+     DetailStoreInfo
   },
   created() {
       /**
@@ -42,6 +46,8 @@ export default {
         // 2. 获取商品介绍信息
         this.goods = new Goods(res.data);
 
+        // 3. 获取店铺详情
+        this.store = new Store(res.data)
 
       }).catch(err=>{
         console.log(err)
