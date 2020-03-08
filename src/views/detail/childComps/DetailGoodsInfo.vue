@@ -1,5 +1,6 @@
 <template>
-  <div class="detail-goods-info">
+<div>
+  <div class="detail-goods-info"  v-if="Object.keys(goods).length !== 0">
       <p>{{goods.describe}}</p>
       <div class="price">
           <div class="now-price">{{goods.nowPrice|finalPrice}}</div>
@@ -18,6 +19,10 @@
           </li>
       </ul>
   </div>
+  <div v-else>
+      <h3>暂无商品，敬请期待</h3>
+  </div>
+</div>
 </template>
 
 <script>
