@@ -35,3 +35,10 @@ export function getDetailInfo(id){
         this.allGoods = storeInfo.storeInfo.allGoods
      }
  }
+
+ export class Params{
+     constructor(info){
+         this.topParams = info.tables;
+         this.bottomParams = info.set
+     }
+ }

@@ -121,8 +121,18 @@ Mock.mock('/detail',"get",{
     "allGoods":'@natural(50,300)',
   },
   "title":'@ctitle',
-  "goodsImage|15":[{
+  "goodsImage|10":[{
     'image':'@dataImage(375x200,漂流记)'
+  }],
+  "tables":[
+      ['尺码','M',"L","XL","XXL"],
+      ['衣长','61.8','63','64.6','66'],
+      ['胸围','98','104','110','116'],
+      ['袖长','63','66','68.5','70.5']
+    ],
+  "set|16":[{
+    "key":"@cword(2)",
+    "value":'@ctitle(10,20)'
   }]
 })
 

@@ -6,12 +6,13 @@
         <detail-goods-info :goods="goods"></detail-goods-info>
         <detail-store-info :store="store"></detail-store-info>
         <detail-image-info :images="images"></detail-image-info>
+        <detail-params-info :params="params"></detail-params-info>
       </scroll>
   </div>
 </template>
 
 <script>
-import {getDetailInfo,Goods,Store} from "network/detail";
+import {getDetailInfo,Goods,Store,Params} from "network/detail";
 
 import Scroll from "components/common/scroll/scroll"
 
@@ -21,6 +22,7 @@ import DetailSwiper from "./childComps/DetailSwiper"
 import DetailGoodsInfo from './childComps/DetailGoodsInfo'
 import DetailStoreInfo from './childComps/DetailStoreInfo'
 import DetailImageInfo from './childComps/DetailImageInfo'
+import DetailParamsInfo from './childComps/DetailParamsInfo'
 
 
 
@@ -33,7 +35,8 @@ export default {
       topImage:[],
       goods:{},   // 商品详情
       store:{},   // 店铺详情
-      images:[]    // 商品图片
+      images:[],    // 商品图片
+      params:{}   // 商品参数
     }
   },
   components: {
@@ -42,7 +45,8 @@ export default {
      DetailSwiper,
      DetailGoodsInfo,
      DetailStoreInfo,
-     DetailImageInfo
+     DetailImageInfo,
+     DetailParamsInfo
   },
   created() {
       /**
@@ -63,6 +67,9 @@ export default {
 
         // 4. 获取商品图片
         this.images = res.data.goodsImage
+
+        // 5. 获取商品参数信息
+        this.params = new Params(res.data)
 
       }).catch(err=>{
         console.log(err)

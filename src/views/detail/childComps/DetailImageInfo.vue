@@ -39,6 +39,5 @@ export default {
 .detail-image{
     box-shadow: 0 -5px 0 rgb(231, 223, 223);
     margin-top: 30px;
-    padding: 5px;
 }
 </style>
