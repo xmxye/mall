@@ -72,10 +72,41 @@ Mock.mock('/home/goods', 'post', (params) => {
  */
 
 Mock.mock('/detail',"get",{   
-  "img": "@dataImage('375x300','#c33', '#ffffff','详情页banner图')", //生成随机图片，大小/背景色/字体颜色/文字信息
-  "descripe":'@paragraph(1)',
+  "topImage|4": [ //每个商品中再随机生成七个food
+    {
+      "img": "@dataImage('375x200')",//生成随机图片，大小/背景色/字体颜色/文字信息
+    }
+  ],    
+  "descripe":'@cparagraph(1,3)',
   "presentPrice":'@int(100,200)',
-  "oldPrice":'@int(150,300)'       
+  "oldPrice":'@int(150,300)',
+  "csell":'@natural(50,300)', 
+  "collect":'@natural(50,300)', 
+  "list":['退货补运费','全国包邮','72小时发货'],
+  "info":{
+    "title":'@cword',
+    "totalSell":'@natural(50,300)',
+    "allGoods":'@natural(50,300)',
+    'remark':[{
+      'title':'描述相符',
+      'score':'4.9',
+      'grade':'1',
+      'level':'高'
+    },
+    {
+      'title':'价格合理',
+      'score':'5',
+      'grade':'1',
+      'level':'高'
+    },
+    {
+      'title':'质量满意',
+      'score':'4.0',
+      'grade':'2',
+      'level':'低'
+    }]
+  },
+  "title":'@ctitle'       
 })
 
 

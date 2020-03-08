@@ -1,6 +1,7 @@
 <template>
   <div class="detail">
-      <DetailNavBar></DetailNavBar>
+      <detail-nav-bar></detail-nav-bar>
+      <detail-swiper :top-image="topImage"></detail-swiper>
   </div>
 </template>
 
@@ -8,29 +9,34 @@
 import {getDetailInfo} from "network/detail";
 
 import DetailNavBar from "./childComps/DetailNavBar"
+import DetailSwiper from "./childComps/DetailSwiper"
 
 
 export default {
   name: 'Detail',
   data () {
     return {
-      
+      id:null,
+      topImage:[]
     }
   },
   components: {
-     DetailNavBar
+     DetailNavBar,
+     DetailSwiper
   },
   created() {
       /**
        * 获取请求页数据
        */
+      this.id = this.$route.query.id;
       getDetailInfo().then((res)=>{
-        console.log(res,7)
+        // console.log(res.data,7);
+        // 1. 获取轮播图数据
+        this.topImage = res.data.topImage;
       }).catch(err=>{
-
+        console.log(err)
       })
-      // console.log(this.$route.query.id)
-  },
+ },
   mounted () {
       
   },
