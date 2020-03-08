@@ -27,7 +27,7 @@
           </tr>
         </table>
       </div>
-      
+      <div class="go-store">进店逛逛</div>
     </div>
     <div v-else>
         <h3>暂无店铺信息，敬请期待</h3>
@@ -104,5 +104,13 @@ export default {
 }
 .bg2 {
   background-color: green;
+}
+.go-store{
+  width: 70px;
+  height: 30px;
+  line-height: 30px;
+  background-color: rgb(231, 223, 223);
+  margin: 15px auto 0;
+  text-align: center;
 }
 </style>

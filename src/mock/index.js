@@ -120,7 +120,10 @@ Mock.mock('/detail',"get",{
     "totalSell":'@natural(50,300)',
     "allGoods":'@natural(50,300)',
   },
-  "title":'@ctitle'       
+  "title":'@ctitle',
+  "goodsImage|15":[{
+    'image':'@dataImage(375x200,漂流记)'
+  }]
 })
 
 
