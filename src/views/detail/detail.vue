@@ -1,11 +1,14 @@
 <template>
   <div class="detail">
-      <h3>详情页</h3>
+      <DetailNavBar></DetailNavBar>
   </div>
 </template>
 
 <script>
 import {getDetailInfo} from "network/detail";
+
+import DetailNavBar from "./childComps/DetailNavBar"
+
 
 export default {
   name: 'Detail',
@@ -15,7 +18,7 @@ export default {
     }
   },
   components: {
-      
+     DetailNavBar
   },
   created() {
       /**
@@ -38,5 +41,5 @@ export default {
 </script>
 
 <style scoped>
-
+  
 </style>
