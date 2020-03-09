@@ -71,4 +71,9 @@ export default {
         display: flex;
         justify-content: space-between;
     }
+    .td{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 </style>

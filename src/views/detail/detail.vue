@@ -7,6 +7,7 @@
         <detail-store-info :store="store"></detail-store-info>
         <detail-image-info :images="images"></detail-image-info>
         <detail-params-info :params="params"></detail-params-info>
+        <detail-comment :comment="comment"></detail-comment>
       </scroll>
   </div>
 </template>
@@ -23,6 +24,7 @@ import DetailGoodsInfo from './childComps/DetailGoodsInfo'
 import DetailStoreInfo from './childComps/DetailStoreInfo'
 import DetailImageInfo from './childComps/DetailImageInfo'
 import DetailParamsInfo from './childComps/DetailParamsInfo'
+import DetailComment from './childComps/DetailComment'
 
 
 
@@ -36,7 +38,8 @@ export default {
       goods:{},   // 商品详情
       store:{},   // 店铺详情
       images:[],    // 商品图片
-      params:{}   // 商品参数
+      params:{},   // 商品参数
+      comment:[]  // 商品评论
     }
   },
   components: {
@@ -46,7 +49,8 @@ export default {
      DetailGoodsInfo,
      DetailStoreInfo,
      DetailImageInfo,
-     DetailParamsInfo
+     DetailParamsInfo,
+     DetailComment
   },
   created() {
       /**
@@ -70,6 +74,9 @@ export default {
 
         // 5. 获取商品参数信息
         this.params = new Params(res.data)
+
+        // 6. 获取商品的评论信息
+        this.comment = res.data.comment
 
       }).catch(err=>{
         console.log(err)

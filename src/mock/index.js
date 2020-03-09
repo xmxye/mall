@@ -133,6 +133,17 @@ Mock.mock('/detail',"get",{
   "set|16":[{
     "key":"@cword(2)",
     "value":'@ctitle(10,20)'
+  }],
+  "comment|2":[{
+    'img': "@dataImage('50x50','#02adea', 'Hello')",
+    "name":'@cname',
+    'comment':"@cword(20,40)",
+    'date':"@date",
+    'color':'@cword(3)',
+    "size":'@word(1)',
+    'list|3':[{
+      "img":'@dataImage(100x100)'
+    }]
   }]
 })
 

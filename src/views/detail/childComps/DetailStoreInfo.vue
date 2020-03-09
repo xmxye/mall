@@ -8,7 +8,7 @@
       <div class="content">
         <div class="left">
           <div class="item">
-            <p>{{store.totalSell}}</p>
+            <p>{{store.totalSell|finalTotalSell}}</p>
             <p>总销量</p>
           </div>
           <div class="item">
@@ -48,6 +48,15 @@ export default {
       default() {
         return {};
       }
+    }
+  },
+  filters:{
+    finalTotalSell(value){
+      let result = value;
+      if(result >= 10000){
+        result = (result / 10000).toFixed(1) + '万'
+      }
+        return result
     }
   },
   computed: {},
