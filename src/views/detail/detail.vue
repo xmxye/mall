@@ -94,6 +94,11 @@ export default {
     background-color: #fff;
   }
   .scroll-content{
-    height: calc(100vh - 44px - 49px);
+    /* height: calc(100vh - 44px - 49px); */
+    position: absolute;
+    top: 44px;
+    bottom: 0;
+    z-index: 9;
+    background-color: #fff;
   }
 </style>

@@ -23,7 +23,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 999;
+  z-index: 7;
   box-shadow: 0 -2px 2px rgba(0, 0, 0, .03); 
 }
 
