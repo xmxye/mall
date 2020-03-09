@@ -5,7 +5,7 @@
         <detail-swiper :top-image="topImage"></detail-swiper>
         <detail-goods-info :goods="goods"></detail-goods-info>
         <detail-store-info :store="store"></detail-store-info>
-        <detail-image-info :images="images"></detail-image-info>
+        <detail-image-info :images="images" @load="loadImage"></detail-image-info>
         <detail-params-info :params="params"></detail-params-info>
         <detail-comment :comment="comment"></detail-comment>
         <detail-recommend :recommend="recommend"></detail-recommend>
@@ -17,6 +17,7 @@
 <script>
 import {getDetailInfo,getDetailRecommend,Goods,Store,Params} from "network/detail";
 
+import {debounce} from "common/utils"
 import {itemListenerMixin} from 'common/mixin'
 
 import Scroll from "components/common/scroll/scroll"
@@ -105,6 +106,13 @@ export default {
           getDetailRecommend().then((res)=>{
             this.recommend = res.data.info
           })
+      },
+      
+      /**
+       * 3. 监听图片加载
+       */
+      loadImage(){
+        this.refresh();
       }      
   },
   destroyed() { 

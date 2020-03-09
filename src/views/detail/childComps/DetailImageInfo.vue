@@ -1,7 +1,7 @@
 <template>
   <div class="detail-image">
       <div v-for="(item,index) in images" :key="index">
-          <img :src="item.image" alt="">
+          <img :src="item.image" alt="" @load="imageLoad()">
       </div>
   </div>
 </template>
@@ -11,7 +11,7 @@ export default {
   name: 'DetailImageInfo',
   data () {
     return {
-      
+      count:null
     }
   },
   props:{
@@ -30,8 +30,10 @@ export default {
       
   },
   methods: {
-    
-  }
+    imageLoad(){    
+        this.$emit('load')
+    }
+  } 
 }
 </script>
 
