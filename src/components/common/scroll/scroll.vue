@@ -45,7 +45,7 @@ export default {
   methods: {
      // 1. 定义scroll回到某个位置的方法
     scrollTo(x,y,time=500){
-      this.scroll && this.scroll.scrollTo(0,0,time)
+      this.scroll && this.scroll.scrollTo(x,y,time)
     },
 
     // 2. 封装refresh方法

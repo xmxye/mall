@@ -1,14 +1,14 @@
 <template>
   <div class="detail">
-      <detail-nav-bar class="detail-nav-bar"></detail-nav-bar>
+      <detail-nav-bar class="detail-nav-bar" @itemClick="itemClick"></detail-nav-bar>
       <scroll class="scroll-content" ref="scroll">
         <detail-swiper :top-image="topImage"></detail-swiper>
         <detail-goods-info :goods="goods"></detail-goods-info>
         <detail-store-info :store="store"></detail-store-info>
         <detail-image-info :images="images" @load="loadImage"></detail-image-info>
-        <detail-params-info :params="params"></detail-params-info>
-        <detail-comment :comment="comment"></detail-comment>
-        <detail-recommend :recommend="recommend"></detail-recommend>
+        <detail-params-info ref="params" :params="params"></detail-params-info>
+        <detail-comment ref="comment" :comment="comment"></detail-comment>
+        <detail-recommend ref="recommend" :recommend="recommend"></detail-recommend>
 
       </scroll>
   </div>
@@ -43,6 +43,8 @@ export default {
       params:{},   // 商品参数
       comment:[],  // 商品评论
       recommend:[],  // 推荐商品
+      titlesTop:null,
+
     }
   },
   components: {
@@ -66,7 +68,7 @@ export default {
      
  },
   mounted () {
-         
+
   },
   mixins:[itemListenerMixin],
   methods: {
@@ -111,9 +113,23 @@ export default {
       /**
        * 3. 监听图片加载
        */
-      loadImage(){
-        this.refresh();
-      }      
+      loadImage(){        
+          this.refresh();
+          this.titlesTop = [];
+          this.titlesTop.push(0);
+          this.titlesTop.push(this.$refs.params.$el.offsetTop);
+          this.titlesTop.push(this.$refs.comment.$el.offsetTop);
+          this.titlesTop.push(this.$refs.recommend.$el.offsetTop);
+
+      },
+
+      /**
+       * 监听导航栏点击
+       */
+      itemClick(index){
+        this.$refs.scroll.scrollTo(0,-this.titlesTop[index]);
+      }
+         
   },
   destroyed() { 
       this.$bus.$off('load',this.itemImgListener)
