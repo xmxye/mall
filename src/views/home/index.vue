@@ -74,7 +74,8 @@ export default {
       isLoad:false,  // 轮播图的图片已经加载好了 
       tabOffsetTop:null,
       isShowTabControlTop:false,
-      saveY:0   //切换时，首页滚动的高度
+      saveY:0,   //切换时，首页滚动的高度
+      itemImgListener:null
     }
   },
   created() {
@@ -88,12 +89,14 @@ export default {
     
   },
   mounted() {    
-     const refresh = debounce((this.$refs.scroll.refresh),3600);
-     this.$bus.$on('load',()=>{
+    const refresh = debounce((this.$refs.scroll.refresh),3600);
+    this.itemImgListener = ()=>{
+       console.log('home监听了商品推荐信息')
        // goods中图片加载完毕后，调用scroll中的refresh方法，重新计算scrollHeight
       //  this.$refs.scroll.refresh();
           refresh()
-     })
+     }
+     this.$bus.$on('load',this.itemImgListener)
 
     
   },
@@ -104,8 +107,11 @@ export default {
     this.$refs.scroll.scrollTo(0,this.saveY,0)
   },
   deactivated() {
+    // 1. 保存离开首页滚动的高度
     this.saveY = this.$refs.scroll.getScrollY();
 
+    // 2. 离开首页，取消监听事件
+    this.$bus.$off('load',this.itemImgListener)
   },
   computed: {
     showGoods(){

@@ -152,9 +152,9 @@ Mock.mock('/detail',"get",{
  * 详情页 商品推荐
  */
 Mock.mock('/detail/recommend',{   
-    'id': "@int(1,50)",
-    "info|10":[
+    "info|6":[
       {
+        'id': "@int(1,50)",
         'pic': "@dataImage('200x200')",
         'desc':"@cword(20)",
         'price':"@integer(10, 100)",

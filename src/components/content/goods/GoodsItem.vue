@@ -40,6 +40,7 @@ export default {
 
   methods: {
     load(){
+      // 首页和详情页，都引入了该组件（商品推荐列表），但并不意味在详情页加载图片，需要发射事件到首页，所以需要区分
       this.$bus.$emit('load')
     },
     itemClick(){     
