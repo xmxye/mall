@@ -29,6 +29,9 @@ export default {
       GoodsList,
       GoodsItem
   },
+  computed: {
+      
+  },
   mounted () {
       
   },

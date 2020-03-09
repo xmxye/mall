@@ -10,6 +10,11 @@ export function getDetailInfo(id){
     })
 }
 
+export function getDetailRecommend(){
+    return request({
+        url:'/detail/recommend'
+    })
+}
 /**
  * 提取goodsInfo信息
  */

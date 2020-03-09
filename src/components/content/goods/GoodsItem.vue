@@ -1,7 +1,7 @@
 <template>
   <div class="goods-item" @click="itemClick()">
-      <img class="img" :src="goodsItem.img" alt="" @load = "load">
-      <p class="description">{{goodsItem.description}}</p>
+      <img class="img" :src="showImage" alt="" @load = "load">
+      <p class="description">{{showDescription}}</p>
       <span class="price">{{goodsItem.price}}</span>
       <span class="collect">★{{goodsItem.collect}}</span>
   </div>
@@ -26,9 +26,18 @@ export default {
   components: {
       
   },
+  computed: {
+    showImage(){ 
+        return this.goodsItem.img || this.goodsItem.pic
+    },
+    showDescription(){
+      return this.goodsItem.description || this.goodsItem.desc
+    }
+  },
   mounted () {
 
   },
+
   methods: {
     load(){
       this.$bus.$emit('load')
@@ -63,5 +72,8 @@ export default {
 }
 .goods-item span{
   margin-left: 6px;
+}
+.price{
+  color: red;
 }
 </style>
