@@ -64,6 +64,7 @@ export default {
     padding: 0 10px;
     box-sizing: border-box;
     width: 100%;
+    background-color: #fff;
 }
 .header{
     display: flex;

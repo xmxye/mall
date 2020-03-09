@@ -49,6 +49,9 @@ export default {
 </script>
 
 <style scoped>   
+    .detail-params{
+        background-color: #fff;
+    }
     .table{
         width: 100%;
     }
