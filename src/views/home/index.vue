@@ -29,7 +29,8 @@
 </template>
 <script>
 import { getHomeMulData ,getHomeGoods} from "network/home";
-import {debounce} from "common/utils"
+
+import {itemListenerMixin} from 'common/mixin'
 
 import NavBar from "components/common/navbar/NavBar";
 import Scroll from "components/common/scroll/scroll"
@@ -75,9 +76,9 @@ export default {
       tabOffsetTop:null,
       isShowTabControlTop:false,
       saveY:0,   //切换时，首页滚动的高度
-      itemImgListener:null
     }
   },
+  mixins:[itemListenerMixin],
   created() {
     // 1.请求多个数据
     this.getHomeMulData()
@@ -89,16 +90,7 @@ export default {
     
   },
   mounted() {    
-    const refresh = debounce((this.$refs.scroll.refresh),3600);
-    this.itemImgListener = ()=>{
-       console.log('home监听了商品推荐信息')
-       // goods中图片加载完毕后，调用scroll中的refresh方法，重新计算scrollHeight
-      //  this.$refs.scroll.refresh();
-          refresh()
-     }
-     this.$bus.$on('load',this.itemImgListener)
-
-    
+       
   },
   destroyed() {
     console.log('home页面被销毁了')

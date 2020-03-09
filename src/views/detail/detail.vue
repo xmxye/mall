@@ -17,8 +17,9 @@
 <script>
 import {getDetailInfo,getDetailRecommend,Goods,Store,Params} from "network/detail";
 
-import Scroll from "components/common/scroll/scroll"
+import {itemListenerMixin} from 'common/mixin'
 
+import Scroll from "components/common/scroll/scroll"
 
 import DetailNavBar from "./childComps/DetailNavBar"
 import DetailSwiper from "./childComps/DetailSwiper"
@@ -28,10 +29,6 @@ import DetailImageInfo from './childComps/DetailImageInfo'
 import DetailParamsInfo from './childComps/DetailParamsInfo'
 import DetailComment from './childComps/DetailComment'
 import DetailRecommend from './childComps/DetailRecommend'
-
-import {debounce} from "common/utils"
-
-
 
 export default {
   name: 'Detail',
@@ -45,8 +42,6 @@ export default {
       params:{},   // 商品参数
       comment:[],  // 商品评论
       recommend:[],  // 推荐商品
-      itemImgListener:null
-
     }
   },
   components: {
@@ -70,15 +65,9 @@ export default {
      
  },
   mounted () {
-    const refresh = debounce((this.$refs.scroll.refresh),3600);
-    this.itemImgListener = ()=>{
-      console.log('detail监听了图片加载事件');
-      refresh()
-    }
-    // 1. 监听商品列表
-    this.$bus.$on('load',this.itemImgListener)
-      
+         
   },
+  mixins:[itemListenerMixin],
   methods: {
     /**
      * 1. 获取详情页信息
