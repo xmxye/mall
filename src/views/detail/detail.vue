@@ -186,7 +186,11 @@ export default {
         product.desc = this.goods.describe;
         product.price = this.goods.nowPrice;
         product.id = this.id;
-        this.$store.commit('addToCart',product);      
+        this.$store.dispatch('addCart',product); 
+        
+        setTimeout(()=>{
+            console.log(this.$store.state.cartList);
+        },1000)
       }
   },
   destroyed() { 
