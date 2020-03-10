@@ -11,7 +11,7 @@
         <detail-recommend ref="recommend" :recommend="recommend"></detail-recommend>
       </scroll>
       <back-top @click.native = "backClick()" v-show="isShowbackTop"></back-top> 
-      <detail-bottom-bar></detail-bottom-bar>
+      <detail-bottom-bar @addToCart="addToCart"></detail-bottom-bar>
   </div>
 </template>
 
@@ -170,6 +170,19 @@ export default {
                   this.$refs.nav.currentIndex = i;
               }
           }
+      },
+
+      /**
+       * 6. 将商品添加购物车
+       */
+      addToCart(){
+        const product = {}
+        // image  title desc  price  id 
+        product.image = this.topImage[0].img;
+        product.desc = this.goods.describe;
+        product.price = this.goods.nowPrice;
+        product.id = this.id;
+        // console.log(product)
       }
   },
   destroyed() { 

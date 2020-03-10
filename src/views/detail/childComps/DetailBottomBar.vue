@@ -13,7 +13,7 @@
               <img src="~assets/img/bottomBar/collect.png" alt="">
               <p>收藏</p>
           </li>
-          <li class="cart action">加入购物车</li>
+          <li class="cart action" @click="addToCart()">加入购物车</li>
           <li class="bug action">购买</li>
       </ul>
   </div>
@@ -34,7 +34,9 @@ export default {
       
   },
   methods: {
-    
+    addToCart(){
+        this.$emit('addToCart')
+    }
   }
 }
 </script>
