@@ -9,8 +9,8 @@
         <detail-params-info ref="params" :params="params"></detail-params-info>
         <detail-comment ref="comment" :comment="comment"></detail-comment>
         <detail-recommend ref="recommend" :recommend="recommend"></detail-recommend>
-
       </scroll>
+      <detail-bottom-bar></detail-bottom-bar>
   </div>
 </template>
 
@@ -30,6 +30,7 @@ import DetailImageInfo from './childComps/DetailImageInfo'
 import DetailParamsInfo from './childComps/DetailParamsInfo'
 import DetailComment from './childComps/DetailComment'
 import DetailRecommend from './childComps/DetailRecommend'
+import DetailBottomBar from './childComps/DetailBottomBar'
 
 export default {
   name: 'Detail',
@@ -56,7 +57,8 @@ export default {
      DetailImageInfo,
      DetailParamsInfo,
      DetailComment,
-     DetailRecommend
+     DetailRecommend,
+     DetailBottomBar
   },
   created() {
       /**
@@ -188,7 +190,7 @@ export default {
     /* height: calc(100vh - 44px - 49px); */
     position: absolute;
     top: 44px;
-    bottom: 0;
+    bottom: 49px;
     left:0;
     right: 0;
     z-index: 9;

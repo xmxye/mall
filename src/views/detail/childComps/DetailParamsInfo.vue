@@ -60,8 +60,6 @@ export default {
         height: 45px;
         line-height: 45px;
         border-bottom: 1px solid #ccc;
-        padding: 0 10px;
-        box-sizing: border-box;
     }
     .tr-bottom > td:first-child{
         width: 50px;

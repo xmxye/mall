@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <main-tab-bar></main-tab-bar>
     <keep-alive>
       <router-view></router-view>
@@ -9,7 +8,6 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import MainTabBar from 'components/content/mainTabbar/MainTabBar'
 
 export default {
