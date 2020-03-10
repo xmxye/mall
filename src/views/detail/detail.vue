@@ -120,7 +120,7 @@ export default {
           this.titlesTop.push(this.$refs.params.$el.offsetTop);
           this.titlesTop.push(this.$refs.comment.$el.offsetTop);
           this.titlesTop.push(this.$refs.recommend.$el.offsetTop);
-
+          this.titlesTop.push(Number.MAX_VALUE);
       },
 
       /**
@@ -134,20 +134,39 @@ export default {
        * 5. 监听滚动的位置
        */
       scroll(position){
-        let saveY = -position.y;  // 获取滚动距离
-        const len = this.titlesTop.length;   
 
-        for(let i = 0; i < len ; i++){  // 0  1  2  3 
+        /**
+         * 方法一
+         */
+        // let saveY = -position.y;  // 获取滚动距离
+        // const len = this.titlesTop.length;   
 
-          // this.currentIndex !==i   节约性能，当i的值未改变时，不对导航栏的currentIndex进行重新赋值
-          // 分两种情况，是避免索引为4的时候，取不到数组中的值
+        // for(let i = 0; i < len ; i++){  // 0  1  2  3 
+
+        //   // this.currentIndex !==i   节约性能，当i的值未改变时，不对导航栏的currentIndex进行重新赋值
+        //   // 分两种情况，是避免索引为4的时候，取不到数组中的值
           
 
-            if((this.currentIndex != i)&&((i<len-1 && saveY >= this.titlesTop[i] && saveY < this.titlesTop[i+1]) || (i==len-1 && saveY >= this.titlesTop[i]))){
-              this.currentIndex = i;
-              this.$refs.nav.currentIndex = i;   // 导航栏标题的显示，是通过currentIndex控制
-            }
-        }
+        //     if((this.currentIndex != i)&&((i<len-1 && saveY >= this.titlesTop[i] && saveY < this.titlesTop[i+1]) || (i==len-1 && saveY >= this.titlesTop[i]))){
+        //       this.currentIndex = i;
+        //       this.$refs.nav.currentIndex = i;   // 导航栏标题的显示，是通过currentIndex控制
+        //     }
+        // }
+
+        /**
+         * 方法二  用空间换时间
+         *      往数组多加了一个很大的数  Number.MAX_VALUE
+                把那两种情况合并了，但是遍历的时候只是变量前面4个，不包括最后一个
+         */
+          let saveY = -position.y;  // 获取滚动距离
+          const len = this.titlesTop.length; 
+
+          for(let i = 0 ;i <len - 1; i++){
+              if((this.currentIndex !==i)&&(saveY >= this.titlesTop[i] && saveY < this.titlesTop[i+1])){
+                  this.currentIndex = i;
+                  this.$refs.nav.currentIndex = i;
+              }
+          }
       }
   },
   destroyed() { 
