@@ -92,5 +92,8 @@ export default {
     display: flex;
     justify-content: space-between;
 }
+.price{
+    color:red
+}
 
 </style>

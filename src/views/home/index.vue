@@ -192,9 +192,6 @@ export default {
   right: 0;
   z-index: 999;
 }
-.xmx-swiper{
-  /* margin-top: 44px */
-}
 
 .scroll-content{
   position: absolute;
