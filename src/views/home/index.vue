@@ -30,13 +30,12 @@
 <script>
 import { getHomeMulData ,getHomeGoods} from "network/home";
 
-import {itemListenerMixin} from 'common/mixin'
+import {itemListenerMixin,backTopMixin} from 'common/mixin'
 
 import NavBar from "components/common/navbar/NavBar";
 import Scroll from "components/common/scroll/scroll"
 
 import TabControl from "components/content/tabcontrol/TabControl"
-import BackTop from "components/content/backTop/BackTop"
 
 import HomeSwiper from "./childComps/HomeSwiper";
 import HomeRecommendView from "./childComps/HomeRecommendView";
@@ -52,7 +51,6 @@ export default {
     NavBar,
     Scroll,
     TabControl,
-    BackTop,
     HomeSwiper,
     HomeRecommendView,
     HomePop,
@@ -71,14 +69,13 @@ export default {
       },
       currentIndex:'pop',
       scroll:null,
-      isShowbackTop:false,
       isLoad:false,  // 轮播图的图片已经加载好了 
       tabOffsetTop:null,
       isShowTabControlTop:false,
       saveY:0,   //切换时，首页滚动的高度
     }
   },
-  mixins:[itemListenerMixin],
+  mixins:[itemListenerMixin,backTopMixin],
   created() {
     // 1.请求多个数据
     this.getHomeMulData()
@@ -165,9 +162,6 @@ export default {
         this.$refs.tabControl2.currentIndex = index; //保证两次tabControl中文字是一样的
     },
 
-    backClick(){
-      this.$refs.scroll.scrollTo(0,0)
-    },
 
     scrollContent(position){
       this.isShowbackTop = (-position.y) > 500;

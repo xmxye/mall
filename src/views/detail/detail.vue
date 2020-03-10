@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
       <detail-nav-bar class="detail-nav-bar" @itemClick="itemClick" ref="nav"></detail-nav-bar>
-      <scroll class="scroll-content" ref="scroll" @scroll="scroll" :probe-type = '3'>
+      <scroll class="scroll-content" ref="scroll" @scroll="scrollContent" :probe-type = '3'>
         <detail-swiper :top-image="topImage"></detail-swiper>
         <detail-goods-info :goods="goods"></detail-goods-info>
         <detail-store-info :store="store"></detail-store-info>
@@ -10,6 +10,7 @@
         <detail-comment ref="comment" :comment="comment"></detail-comment>
         <detail-recommend ref="recommend" :recommend="recommend"></detail-recommend>
       </scroll>
+      <back-top @click.native = "backClick()" v-show="isShowbackTop"></back-top> 
       <detail-bottom-bar></detail-bottom-bar>
   </div>
 </template>
@@ -18,7 +19,7 @@
 import {getDetailInfo,getDetailRecommend,Goods,Store,Params} from "network/detail";
 
 import {debounce} from "common/utils"
-import {itemListenerMixin} from 'common/mixin'
+import {itemListenerMixin,backTopMixin} from 'common/mixin'
 
 import Scroll from "components/common/scroll/scroll"
 
@@ -72,7 +73,7 @@ export default {
   mounted () {
       
   },
-  mixins:[itemListenerMixin],
+  mixins:[itemListenerMixin,backTopMixin],
   methods: {
     /**
      *   1. 获取详情页信息
@@ -135,8 +136,8 @@ export default {
       /**
        * 5. 监听滚动的位置
        */
-      scroll(position){
-
+      scrollContent(position){
+          this.isShowbackTop = (-position.y) > 500;
         /**
          * 方法一
          */
