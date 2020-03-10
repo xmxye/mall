@@ -1,28 +1,22 @@
 <template>
     <div class="cart">
-        <nav-bar class="cart-nav">
-            <div slot="center">购物车({{count}})</div>
-        </nav-bar>
+       <cart-nav-bar></cart-nav-bar>
+       <cart-list-info></cart-list-info>
     </div>
 </template>
 <script>
-import {mapGetters} from 'vuex'
-import NavBar from 'components/common/navbar/NavBar'
+import CartNavBar from './childComps/CartNavBar'
+import CartListInfo from './childComps/CartListInfo'
+
 export default {
     name:'Cart',
     components:{
-        NavBar
-    },
-    computed: {
-        ...mapGetters({
-            'count':'cartLength'
-        })
-    },
+        CartNavBar,
+        CartListInfo
+    }
+   
 }
 </script>    
 <style scoped>
-    .cart-nav{
-        background-color: RGB(255, 150, 170);
-        color: #fff;
-    }
+   
 </style>
