@@ -71,7 +71,11 @@ export default {
      
  },
   mounted () {
-      
+     
+  },
+  computed: {
+   
+
   },
   mixins:[itemListenerMixin,backTopMixin],
   methods: {
@@ -182,7 +186,7 @@ export default {
         product.desc = this.goods.describe;
         product.price = this.goods.nowPrice;
         product.id = this.id;
-        // console.log(product)
+        this.$store.commit('addToCart',product);      
       }
   },
   destroyed() { 
