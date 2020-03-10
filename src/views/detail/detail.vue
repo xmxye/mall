@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
-      <detail-nav-bar class="detail-nav-bar" @itemClick="itemClick"></detail-nav-bar>
-      <scroll class="scroll-content" ref="scroll">
+      <detail-nav-bar class="detail-nav-bar" @itemClick="itemClick" ref="nav"></detail-nav-bar>
+      <scroll class="scroll-content" ref="scroll" @scroll="scroll" :probe-type = '3'>
         <detail-swiper :top-image="topImage"></detail-swiper>
         <detail-goods-info :goods="goods"></detail-goods-info>
         <detail-store-info :store="store"></detail-store-info>
@@ -43,8 +43,8 @@ export default {
       params:{},   // 商品参数
       comment:[],  // 商品评论
       recommend:[],  // 推荐商品
-      titlesTop:null,
-
+      titlesTop:[],
+      currentIndex:0
     }
   },
   components: {
@@ -68,12 +68,12 @@ export default {
      
  },
   mounted () {
-
+      
   },
   mixins:[itemListenerMixin],
   methods: {
     /**
-     * 1. 获取详情页信息
+     *   1. 获取详情页信息
      */
       getDetailInfo(){
           getDetailInfo().then((res)=>{
@@ -124,12 +124,31 @@ export default {
       },
 
       /**
-       * 监听导航栏点击
+       * 4. 监听导航栏点击
        */
       itemClick(index){
         this.$refs.scroll.scrollTo(0,-this.titlesTop[index]);
+      },
+
+      /**
+       * 5. 监听滚动的位置
+       */
+      scroll(position){
+        let saveY = -position.y;  // 获取滚动距离
+        const len = this.titlesTop.length;   
+
+        for(let i = 0; i < len ; i++){  // 0  1  2  3 
+
+          // this.currentIndex !==i   节约性能，当i的值未改变时，不对导航栏的currentIndex进行重新赋值
+          // 分两种情况，是避免索引为4的时候，取不到数组中的值
+          
+
+            if((this.currentIndex != i)&&((i<len-1 && saveY >= this.titlesTop[i] && saveY < this.titlesTop[i+1]) || (i==len-1 && saveY >= this.titlesTop[i]))){
+              this.currentIndex = i;
+              this.$refs.nav.currentIndex = i;   // 导航栏标题的显示，是通过currentIndex控制
+            }
+        }
       }
-         
   },
   destroyed() { 
       this.$bus.$off('load',this.itemImgListener)

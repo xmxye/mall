@@ -27,8 +27,14 @@ export default {
   components: {
      NavBar
   },
+  props:{
+    presentIndex:{
+      type:Number,
+      default:0
+    }
+  },
   mounted () {
-      
+      console.log(this.presentIndex)
   },
   methods: {
     itemClick(index){
@@ -37,6 +43,11 @@ export default {
     },
     backClick(){
       this.$router.back()
+    }
+  },
+  watch:{
+    presentIndex(){
+      this.currentIndex == this.presentIndex
     }
   }
 }
