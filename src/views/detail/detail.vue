@@ -48,7 +48,7 @@ export default {
       comment:[],  // 商品评论
       recommend:[],  // 推荐商品
       titlesTop:[],
-      currentIndex:0
+      currentIndex:0,
     }
   },
   components: {
@@ -61,7 +61,7 @@ export default {
      DetailParamsInfo,
      DetailComment,
      DetailRecommend,
-     DetailBottomBar
+     DetailBottomBar,
   },
   created() {
       /**
@@ -191,8 +191,8 @@ export default {
         // this.$store.dispatch('addCart',product).then(res=>{
         //   console.log(res)
         // })      
-        this.addCart(product).then((res)=>{
-          console.log(res)
+        this.addCart(product).then(res=>{
+           this.$toast.show(res);
         })
       }
   },
