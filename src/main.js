@@ -17,7 +17,7 @@ Vue.use(VueLazyload, {
   error: require('assets/img/lazy/error.png')    
 });
 
-
+import 'lib-flexible'
 
 
 require ('network/request/request.js')
