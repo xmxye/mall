@@ -3,7 +3,6 @@ import Toast from './Toast.vue'
 const obj = {}
 
 obj.install = function (Vue) {
-    console.log(Vue)
     // 1. 创建组件构造器
     const toastConstructor = Vue.extend(Toast)
 

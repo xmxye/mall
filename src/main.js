@@ -10,6 +10,14 @@ import toast from 'components/common/toast/index'
 import fastclick from 'fastclick';
 fastclick.attach(document.body); 
 
+// 处理图片懒加载
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+  loading: require('assets/img/lazy/loading.png'),     
+  error: require('assets/img/lazy/error.png')    
+});
+
+
 
 
 require ('network/request/request.js')
