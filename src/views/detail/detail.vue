@@ -33,6 +33,8 @@ import DetailComment from './childComps/DetailComment'
 import DetailRecommend from './childComps/DetailRecommend'
 import DetailBottomBar from './childComps/DetailBottomBar'
 
+import {mapActions} from 'vuex'
+
 export default {
   name: 'Detail',
   data () {
@@ -79,6 +81,7 @@ export default {
   },
   mixins:[itemListenerMixin,backTopMixin],
   methods: {
+    ...mapActions(['addCart']),
     /**
      *   1. 获取详情页信息
      */
@@ -181,12 +184,16 @@ export default {
        */
       addToCart(){
         const product = {}
-        // image  title desc  price  id 
         product.image = this.topImage[0].img;
         product.desc = this.goods.describe;
         product.price = this.goods.nowPrice;
         product.id = this.id;
-        this.$store.dispatch('addCart',product);       
+        // this.$store.dispatch('addCart',product).then(res=>{
+        //   console.log(res)
+        // })      
+        this.addCart(product).then((res)=>{
+          console.log(res)
+        })
       }
   },
   destroyed() { 
