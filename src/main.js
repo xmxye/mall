@@ -6,6 +6,12 @@ import store from './store/index'
 
 import toast from 'components/common/toast/index'
 
+// 处理移动端300毫秒延迟
+import fastclick from 'fastclick';
+fastclick.attach(document.body); 
+
+
+
 require ('network/request/request.js')
 require ('mock/index.js')
 

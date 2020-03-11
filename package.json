@@ -11,6 +11,7 @@
     "axios": "^0.19.2",
     "better-scroll": "^2.0.0-beta.6",
     "core-js": "^3.6.4",
+    "fastclick": "^1.0.6",
     "mockjs": "^1.1.0",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",
