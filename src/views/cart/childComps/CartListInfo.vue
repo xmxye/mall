@@ -2,7 +2,7 @@
   <div class="cart-list">
       <div class="item" v-for="(item,index) in cartList" :key="index">
           <div class="left-part">
-              <img src="~assets/img/cart/check.png" alt="">
+              <check-button :is-checked="item.isChecked" @click.native = "buttonClick(item)"></check-button>
           </div>
           <div class="right-part">
              <div class="pic">
@@ -24,6 +24,8 @@
 <script>
 import {mapGetters} from 'vuex'
 
+import CheckButton from 'components/content/checkButton/CheckButton'
+
 export default {
   name: 'CartList',
   data () {
@@ -32,7 +34,7 @@ export default {
     }
   },
   components: {
-      
+     CheckButton
   },
   computed: {
       ...mapGetters(['cartList'])
@@ -44,7 +46,12 @@ export default {
       finalCount(value){
           return 'X' + value
       }
-  }
+  },
+  methods: {
+      buttonClick(item){
+          item.isChecked = !item.isChecked
+      }
+  },
 }
 </script>
 
