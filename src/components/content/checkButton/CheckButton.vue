@@ -1,6 +1,6 @@
 <template>
   <div class="check-button" :class="{'active':isChecked}">
-      <img src="~assets/img/cart/check.svg">
+      <img src="~assets/img/cart/check.svg" class="img">
   </div>
 </template>
 
@@ -32,14 +32,17 @@ export default {
 
 <style scoped>
     .check-button{
-      width: 32px;
-      height: 32px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       border: 2px solid #aaa;
       background-color: #fff;
       
     }
-   
+    .img{
+      width: 18px;
+      height: 18px;
+    }
     .active{
         border-color: red;
         background-color: red;

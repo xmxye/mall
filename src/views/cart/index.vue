@@ -4,6 +4,7 @@
         <scroll class="scroll-content" ref="scroll" :probe-type="3">
             <cart-list-info class="list"></cart-list-info>
        </scroll>
+       <cart-bottom-tools></cart-bottom-tools>
     </div>
 </template>
 <script>
@@ -11,13 +12,15 @@ import Scroll from "components/common/scroll/scroll"
 
 import CartNavBar from './childComps/CartNavBar'
 import CartListInfo from './childComps/CartListInfo'
+import CartBottomTools from './childComps/CartBottomTools'
 
 export default {
     name:'Cart',
     components:{
         Scroll,
         CartNavBar,
-        CartListInfo
+        CartListInfo,
+        CartBottomTools
     }
    
 }
@@ -26,7 +29,7 @@ export default {
    .scroll-content{
        position: absolute;
        top: 44px;
-       bottom: 49px;
+       bottom: 84px;
        z-index: 1;
    }
    .list{
