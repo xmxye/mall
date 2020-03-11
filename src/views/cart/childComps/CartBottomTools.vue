@@ -1,7 +1,7 @@
 <template>
   <div class="cart-bottom-tools">
      <div class="item btn">
-         <check-button></check-button>
+         <check-button :is-checked = isSelectAll @click.native = "checkBtnClick()"></check-button>
          <span>全选</span>
      </div>
      <div class="item">合计：{{totalPrice}}</div>
@@ -27,7 +27,7 @@ export default {
       ...mapGetters({
           'cartList':'cartList',
       }),
-      //计算价格合计
+      // 1. 计算价格合计
       totalPrice(){
           return "￥" + this.cartList.filter((item)=>{
              return item.isChecked == true
@@ -35,15 +35,34 @@ export default {
               return pre + curr.price * curr.count
           },0).toFixed(2)
       },
+
+      // 2. 计算购买的种类
       totalCount(){
           return this.cartList.filter((item)=>item.isChecked).length
+      },
+
+      /**
+       * 控制全选按钮
+       */
+
+     // 1. 根据商品选中 控制全选按钮,find是找到一个返回该值，找不到返回undefined
+      isSelectAll(){
+          if(this.cartList.length == 0) return false
+          return !this.cartList.find((item) => item.isChecked == false)
       }
   },
   mounted () {
       
   },
   methods: {
-    
+    checkBtnClick(){
+        if(this.isSelectAll){
+            this.cartList.forEach(item => item.isChecked = false)
+        }else{
+            this.cartList.forEach(item => item.isChecked = true)
+            
+        }
+    }
   }
 }
 </script>
